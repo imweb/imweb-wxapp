@@ -1,6 +1,6 @@
 {
   "name": "weapp-storage",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "微信小程序 storage 组件",
   "main": "miniprogram_dist/index.js",
   "scripts": {
