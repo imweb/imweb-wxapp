@@ -1,5 +1,5 @@
 import 'miniprogram-simulate';
-import { storage, Storage } from '../src/index';
+import { storage, Storage } from '../../src/storage/index';
 
 describe('index', () => {
   test('the storage is Storage object, which namespace is "global"', () => {
