@@ -1,7 +1,7 @@
 {
-  "name": "weapp-storage",
-  "version": "1.0.1",
-  "description": "微信小程序 storage 组件",
+  "name": "@imweb/weapp-utils",
+  "version": "1.0.0",
+  "description": "微信小程序基础组件库",
   "main": "miniprogram_dist/index.js",
   "scripts": {
     "dev": "gulp dev --develop",
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/imweb/imweb-wxapp/tree/master/utils/weapp-storage"
+    "url": "https://github.com/imweb/imweb-wxapp"
   },
   "author": "imweb",
   "license": "MIT",

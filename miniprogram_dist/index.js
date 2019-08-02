@@ -93,9 +93,42 @@ module.exports =
 
 
 exports.__esModule = true;
+
+var _index = __webpack_require__(1);
+
+Object.keys(_index).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _index[key];
+    }
+  });
+});
+
+var _cookie = __webpack_require__(3);
+
+Object.keys(_cookie).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _cookie[key];
+    }
+  });
+});
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
 exports.Storage = exports.storage = undefined;
 
-var _Storage = __webpack_require__(1);
+var _Storage = __webpack_require__(2);
 
 var _Storage2 = _interopRequireDefault(_Storage);
 
@@ -107,7 +140,7 @@ exports.storage = storage;
 exports.Storage = _Storage2.default;
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -259,6 +292,106 @@ var Storage = function () {
 }();
 
 exports.default = Storage;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/* eslint-disable no-sync */
+var STORAGE_KEY_COOKIE = '__cookie__';
+var PLACEHOLDER_SEMI = '###';
+var PLACEHOLDER_EQUAL = '%%%';
+var REG_PLACEHOLDER_SEMI = new RegExp(PLACEHOLDER_SEMI, 'g');
+var REG_PLACEHOLDER_EQUAL = new RegExp(PLACEHOLDER_EQUAL, 'g');
+
+/**
+ * 返回 cookie 头字符串
+ * @returns {String}
+ */
+function getCookieStr() {
+  return wx.getStorageSync(STORAGE_KEY_COOKIE);
+}
+
+/**
+ * 返回解析后的 cookie 键值对对象
+ * @returns {Object}
+ */
+function getCookieJar() {
+  var cookieStr = getCookieStr() || '';
+  return cookieStr.split(';').filter(function (s) {
+    return s;
+  }).reduce(function (acc, cur) {
+    var _cur$split = cur.split('='),
+        k = _cur$split[0],
+        v = _cur$split[1];
+
+    acc[k] = v && v.replace(REG_PLACEHOLDER_SEMI, ';').replace(REG_PLACEHOLDER_EQUAL, '=') || '';
+    return acc;
+  }, {});
+}
+
+/**
+ * 写 cookie 包
+ * @param {String|Object} sessionObj 传入的字符串或对象
+ */
+function setCookieJar(sessionObj) {
+  var cookieStr = sessionObj;
+  var type = typeof sessionObj === 'undefined' ? 'undefined' : _typeof(sessionObj);
+  if (type === 'object') {
+    cookieStr = Object.keys(sessionObj).map(function (k) {
+      return k + '=' + (sessionObj[k] && String(sessionObj[k]).replace(/;/g, PLACEHOLDER_SEMI).replace(/=/g, PLACEHOLDER_EQUAL) || '');
+    }).join(';');
+  } else if (type !== 'string') {
+    throw new Error('COOKIE_ERROR_SET_NOT_SUPPORTED_TYPE:' + type);
+  }
+  wx.setStorageSync(STORAGE_KEY_COOKIE, cookieStr);
+}
+
+/**
+ * 取 cookie 值
+ * @param {String} key cookie 键名
+ * @returns {String}
+ */
+function getCookie(key) {
+  var cookieJar = getCookieJar();
+  return cookieJar[key] || '';
+}
+
+/**
+ * 写 cookie 值
+ * @param {String} key cookie 键名
+ * @param {String} value 值
+ */
+function setCookie(key, value) {
+  var cookieJar = getCookieJar();
+  if (key) {
+    cookieJar[key] = value || '';
+    setCookieJar(cookieJar);
+  } else {
+    throw new Error('COOKIE_ERROR_SET_NOT_KEY');
+  }
+}
+
+/**
+ * 清除所有 cookie
+ */
+function clearCookie() {
+  wx.setStorageSync(STORAGE_KEY_COOKIE, '');
+}
+
+exports.getCookie = getCookie;
+exports.setCookie = setCookie;
+exports.getCookieStr = getCookieStr;
+exports.setCookieJar = setCookieJar;
+exports.getCookieJar = getCookieJar;
+exports.clearCookie = clearCookie;
 
 /***/ })
 /******/ ]);

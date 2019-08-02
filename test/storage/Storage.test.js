@@ -1,5 +1,5 @@
 import 'miniprogram-simulate';
-import Storage from '../src/Storage';
+import Storage from '../../src/storage/Storage';
 
 describe('Storage', () => {
   const namespace1 = 'ns1';
