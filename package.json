@@ -10,8 +10,7 @@
     "dist": "npm run build",
     "clean-dev": "gulp clean --develop",
     "clean": "gulp clean",
-    "test": "jest ./test/* --silent --bail",
-    "coverage": "jest ./test/* --coverage --bail",
+    "test": "jest ./test/* --coverage --silent --bail",
     "lint": "eslint \"src/**/*.js\"",
     "lint-tools": "eslint \"tools/**/*.js\" --rule \"import/no-extraneous-dependencies: false\""
   },
@@ -22,6 +21,14 @@
     "collectCoverageFrom": [
       "src/**/*.js"
     ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 85,
+        "functions": 85,
+        "lines": 85,
+        "statements": 85
+      }
+    },
     "moduleDirectories": [
       "node_modules",
       "src"
@@ -60,6 +67,5 @@
     "vinyl": "^2.2.0",
     "webpack": "^4.29.5",
     "webpack-node-externals": "^1.7.2"
-  },
-  "dependencies": {}
+  }
 }
