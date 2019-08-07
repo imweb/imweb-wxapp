@@ -8,6 +8,7 @@ import {
   setCookieJar,
   getCookieJar,
   clearCookie,
+  authorize,
 } from '../src/index';
 
 describe('index', () => {
@@ -34,5 +35,8 @@ describe('index', () => {
 
     expect(clearCookie).not.toBeUndefined();
     expect(typeof clearCookie === 'function').toBeTruthy();
+
+    expect(authorize).not.toBeUndefined();
+    expect(typeof authorize === 'function').toBeTruthy();
   });
 });
