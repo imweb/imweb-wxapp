@@ -9,6 +9,7 @@ import {
   getCookieJar,
   clearCookie,
   authorize,
+  promisify,
 } from '../src/index';
 
 describe('index', () => {
@@ -38,5 +39,8 @@ describe('index', () => {
 
     expect(authorize).not.toBeUndefined();
     expect(typeof authorize === 'function').toBeTruthy();
+
+    expect(promisify).not.toBeUndefined();
+    expect(typeof promisify === 'function').toBeTruthy();
   });
 });
