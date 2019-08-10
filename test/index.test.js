@@ -9,6 +9,8 @@ import {
   getCookieJar,
   clearCookie,
   authorize,
+  request,
+  middlewares,
 } from '../src/index';
 
 describe('index', () => {
@@ -38,5 +40,11 @@ describe('index', () => {
 
     expect(authorize).not.toBeUndefined();
     expect(typeof authorize === 'function').toBeTruthy();
+
+    expect(request).not.toBeUndefined();
+    expect(typeof request === 'function').toBeTruthy();
+
+    expect(middlewares).not.toBeUndefined();
+    expect(middlewares instanceof Array).toBeTruthy();
   });
 });
