@@ -10,6 +10,8 @@ import {
   clearCookie,
   authorize,
   promisify,
+  request,
+  middlewares,
 } from '../src/index';
 
 describe('index', () => {
@@ -42,5 +44,11 @@ describe('index', () => {
 
     expect(promisify).not.toBeUndefined();
     expect(typeof promisify === 'function').toBeTruthy();
+
+    expect(request).not.toBeUndefined();
+    expect(typeof request === 'function').toBeTruthy();
+
+    expect(middlewares).not.toBeUndefined();
+    expect(middlewares instanceof Array).toBeTruthy();
   });
 });
