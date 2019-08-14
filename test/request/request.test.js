@@ -108,12 +108,10 @@ describe('request/request', () => {
       };
     };
 
-    const ret = request({ ...defaultOpts, timeout: 1000 }).then(() => {
+    return request({ ...defaultOpts, timeout: 1000 }).then(() => {
       jest.runAllTimers();
       expect(mockAbort.mock.calls.length).toBe(0);
     });
-
-    return ret;
   });
 
   test('get REQUEST_ERROR_NETWORK:[networkType] when request fail', () => {

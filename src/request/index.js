@@ -20,18 +20,21 @@ const useCookie = (ctx, next) => {
       // 这里的 , 号分隔很奇怪，已经反馈给微信方
       // 示例 test=,whistle_nohost_env=edu;
       // Expires=Thu, 15 Nov 2018 05:13:12 GMT; Max-Age=259200; Path=/; Domain=.qq.com
-      const cookies = setCookieHeader.split(/,(?!\s)/).map((str) =>
-        str.split(/;\s*/).reduce((acc, cur, i) => {
-          const [k, v] = cur.split('=');
-          if (i === 0) {
-            acc.key = k;
-            acc.value = v;
-          } else {
-            acc[k] = v;
-          }
-          return acc;
-        }, {})
-      );
+      const cookies = setCookieHeader
+        .split(/,(?!\s)/)
+        .filter((s) => s)
+        .map((str) =>
+          str.split(/;\s*/).reduce((acc, cur, i) => {
+            const [k, v] = cur.split('=');
+            if (i === 0) {
+              acc.key = k;
+              acc.value = v;
+            } else {
+              acc[k] = v;
+            }
+            return acc;
+          }, {})
+        );
       cookies.forEach((cookie) => {
         setCookie(cookie.key, cookie.value);
       });
@@ -74,6 +77,9 @@ const request = (req) => {
     header: { 'content-type': 'application/x-www-form-urlencoded' },
   };
   const ctx = { req: { ...defaultOptions, ...req }, res: {} };
+  if (req.header) {
+    ctx.req.header = { ...req.header };
+  }
   return compose(middlewares)(ctx, () =>
     fetch(ctx.req).then((res) => {
       ctx.res = res;
