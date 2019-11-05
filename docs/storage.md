@@ -4,7 +4,7 @@
 ## 使用
 
 ```
-npm install -S weapp-storage
+npm install -S @imweb/weapp-utils
 ```
 
 ``` js
